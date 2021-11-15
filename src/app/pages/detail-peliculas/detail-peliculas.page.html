@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/peliculas"
+                        text="back" >
+                      </ion-back-button>
+       </ion-buttons>
+    <ion-title *ngIf="peliModificable">{{ peliModificable.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-loading-feedback [state]="state">
+
+    <ion-card *ngIf="peliModificable">
+      <img [src]="peliModificable.poster" class="tamaño" alt="">
+    <ion-card-header>
+      <ion-card-subtitle>Puntuacion: {{ peliModificable.imdbRating }}</ion-card-subtitle>
+      <ion-card-title>Duracion: {{ peliModificable.duration }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
+  <form [formGroup]="userForm" (submit)="submitForm()" >
+
+    <ion-item hidden>
+      <ion-input formControlName="id"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-label position="floating">Titulo</ion-label>
+      <ion-input formControlName="title"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-label position="floating">Imagen (url)</ion-label>
+      <ion-input formControlName="poster"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Año</ion-label>
+      <ion-input formControlName="year"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Duracion</ion-label>
+        <ion-input formControlName="duration"></ion-input>
+        </ion-item>
+
+
+        <ion-button type="submit"
+                    (click)="update()"
+                    [disabled]="userForm.invalid || botonDeshabilitado"
+                    expand="block" fill="clear" shape="round"
+            >Enviar</ion-button>
+
+</form>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-row>
+    <ion-col >
+
+      <ion-fab-button color="danger"
+                      (click)="presentAlertConfirm()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+
+    </ion-col>
+
+    <ion-col>
+
+      <ion-fab-button (click)="deshabilitar()">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-fab-button>
+    </ion-col>
+  </ion-row>
+
+      </ion-fab>
+
+  </app-loading-feedback>
+
+
+
+</ion-content>

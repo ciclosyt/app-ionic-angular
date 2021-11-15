@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/peliculas"
+                        text="back" >
+                      </ion-back-button>
+       </ion-buttons>
+    
+    <ion-title>Nueva Pelicula</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <form [formGroup]="userForm" (submit)="submitForm()" >
+      <ion-item hidden>
+        <ion-input formControlName="id"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Titulo</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Poster</ion-label>
+        <ion-input formControlName="poster"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Genero</ion-label>
+        <ion-select placeholder="Select One" formControlName="genre">
+          <ion-select-option value="Horror">Horror</ion-select-option>
+          <ion-select-option value="Thriller">Thriller</ion-select-option>
+          <ion-select-option value="action">Action</ion-select-option>
+          <ion-select-option value="Romance">Romance</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Año</ion-label>
+        <ion-datetime displayFormat="YYYY" formControlName="year"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Duracion<small> (En minutos)</small> </ion-label>
+        <ion-input formControlName="duration" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Puntuacion</ion-label>
+        <ion-input formControlName="imdbRating" type="number"></ion-input>
+      </ion-item>
+
+
+
+    </form>
+  </ion-list>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button type="submit" (click)="guardarPeli()" expand="block" fill="clear" shape="round" [disabled]="userForm.invalid" >
+      Guardar Pelicula
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
